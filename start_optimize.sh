@@ -12,6 +12,8 @@ for filepath in $INPUT_DIR; do
     pngquant -o $OUTPUT_DIR${filepath##*/} ${filepath}
   elif [ $extension = "jpg" ] || [ $extension = "jpeg" ] || [ $extension = "JPEG" ] || [ $extension = "JPG" ]; then
     jpegoptim -m $1 -d $OUTPUT_DIR $filepath
+  elif [ $extension = "mp4" ] || [ $extension = "MP4" ]; then
+    ffmpeg -i $filepath -crf 23 $OUTPUT_DIR${filepath##*/}
   else
     echo 処理できませんでした。 ファイル名: $filepath 拡張子: $extension
   fi
